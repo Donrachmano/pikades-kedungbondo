@@ -1,0 +1,381 @@
+/* Tailwind CSS Reset */
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/src/css/preflight.css');
+
+/* Design System Variables */
+:root {
+  /* Indonesia-themed Color Palette */
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 210 40% 50%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 9%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --radius: 0.5rem;
+  
+  /* Indonesia Election Theme Colors */
+  --election-red: 0 85% 55%;
+  --election-white: 0 0% 100%;
+  --election-blue: 210 100% 45%;
+  --election-success: 142 76% 36%;
+  --election-warning: 38 92% 50%;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--election-red)), hsl(var(--election-blue)));
+  --gradient-hero: linear-gradient(135deg, hsl(var(--election-red)) 0%, hsl(var(--election-blue)) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(var(--election-white) / 0.9), hsl(var(--election-white) / 0.7));
+  
+  /* Shadows */
+  --shadow-card: 0 4px 20px hsl(var(--primary) / 0.1);
+  --shadow-glow: 0 0 30px hsl(var(--accent) / 0.3);
+  --shadow-indonesia: 0 8px 32px hsl(var(--election-red) / 0.2);
+}
+
+/* Dark mode variables */
+.dark {
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 0% 63%;
+  --accent: 210 40% 80%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14%;
+  --input: 0 0% 14%;
+  --ring: 0 0% 83%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+}
+
+/* Base Styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Indonesia Theme Components */
+.election-hero {
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.election-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, hsl(var(--election-white) / 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, hsl(var(--election-white) / 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.indonesia-map-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Cpath fill='white' d='M50 100 Q100 80 150 90 T250 95 Q300 85 350 100 L350 150 Q300 140 250 145 T150 140 Q100 150 50 140 Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.election-card {
+  background: var(--gradient-card);
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) * 2);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.election-card:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.candidate-card {
+  background: var(--gradient-card);
+  border: 2px solid hsl(var(--border));
+  border-radius: calc(var(--radius) * 3);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-indonesia);
+}
+
+.candidate-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px hsl(var(--election-red) / 0.3);
+}
+
+/* Rocket Animation Styles */
+.rocket-container {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.rocket {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 4px 12px hsl(var(--accent) / 0.4));
+  animation: rocket-hover 2s ease-in-out infinite alternate;
+}
+
+@keyframes rocket-hover {
+  0% { transform: translateY(0px) rotate(-5deg); }
+  100% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Vote Counter Animation */
+.vote-counter {
+  font-size: 3rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  0% { filter: drop-shadow(0 0 5px hsl(var(--accent) / 0.5)); }
+  100% { filter: drop-shadow(0 0 20px hsl(var(--accent) / 0.8)); }
+}
+
+/* Animations */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes rocket-fly {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes count-up {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-rocket-fly {
+  animation: rocket-fly 1s ease-out;
+}
+
+.animate-count-up {
+  animation: count-up 0.8s ease-out;
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: hsl(var(--secondary));
+  border-radius: calc(var(--radius) * 2);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: calc(var(--radius) * 2);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, hsl(var(--election-white) / 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Loading Animations */
+.loading-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.loading-dot {
+  width: 12px;
+  height: 12px;
+  background-color: hsl(var(--election-white));
+  border-radius: 50%;
+  animation: loading-pulse 1.4s ease-in-out infinite both;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+.loading-dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes loading-pulse {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .candidate-card {
+    padding: 1.5rem;
+  }
+  
+  .vote-counter {
+    font-size: 2rem;
+  }
+  
+  .rocket {
+    font-size: 2rem;
+  }
+  
+  .election-card {
+    padding: 1rem;
+  }
+}
+
+/* Utility Classes */
+.text-election-success { color: hsl(var(--election-success)); }
+.text-election-warning { color: hsl(var(--election-warning)); }
+.bg-primary { background-color: hsl(var(--primary)); }
+.text-primary { color: hsl(var(--primary)); }
+.text-accent { color: hsl(var(--accent)); }
+.text-muted-foreground { color: hsl(var(--muted-foreground)); }
+.text-foreground { color: hsl(var(--foreground)); }
+.text-white { color: hsl(var(--election-white)); }
+.bg-secondary { background-color: hsl(var(--secondary)); }
+.text-destructive { color: hsl(var(--destructive)); }
+
+/* Container and Layout */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.min-h-screen { min-height: 100vh; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.grid { display: grid; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.rounded-full { border-radius: 9999px; }
+.rounded-lg { border-radius: 0.5rem; }
+.font-bold { font-weight: 700; }
+.font-black { font-weight: 900; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+.text-6xl { font-size: 3.75rem; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-6xl { max-width: 72rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.opacity-10 { opacity: 0.1; }
+.opacity-90 { opacity: 0.9; }
+.z-10 { z-index: 10; }
+
+@media (min-width: 768px) {
+  .md\\:text-4xl { font-size: 2.25rem; }
+  .md\\:text-5xl { font-size: 3rem; }
+  .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
